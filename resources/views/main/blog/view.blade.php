@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    DiveLogRepeat - {{ $post->title }}
+    {{ config('app.name') }} - {{ $post->title }}
 @stop
 
 @section('content')

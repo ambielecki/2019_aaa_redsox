@@ -1,4 +1,4 @@
-window.DiveLogRepeat = {
+window.Bielecki = {
     // Credit David Walsh (https://davidwalsh.name/javascript-debounce-function)
 
     // Returns a function, that, as long as it continues to be invoked, will not
@@ -166,22 +166,22 @@ window.DiveLogRepeat = {
     }
 };
 
-DiveLogRepeat.loadVueComponents();
-DiveLogRepeat.initVueFilters();
+Bielecki.loadVueComponents();
+Bielecki.initVueFilters();
 Vue.use(VueRouter);
 
 document.addEventListener('DOMContentLoaded', function() {
-    DiveLogRepeat.initSidenav();
-    DiveLogRepeat.initDropdown();
-    DiveLogRepeat.initCollapsible();
-    DiveLogRepeat.initCarousel(null, {
+    Bielecki.initSidenav();
+    Bielecki.initDropdown();
+    Bielecki.initCollapsible();
+    Bielecki.initCarousel(null, {
         fullWidth: true,
         indicators: true
     });
-    DiveLogRepeat.initMaterialBox();
-    DiveLogRepeat.initSelects();
-    DiveLogRepeat.initTableCrosshair();
-    DiveLogRepeat.initFlashMessage();
-    DiveLogRepeat.initHeartbeat();
+    Bielecki.initMaterialBox();
+    Bielecki.initSelects();
+    Bielecki.initTableCrosshair();
+    Bielecki.initFlashMessage();
+    Bielecki.initHeartbeat();
     Materialize.updateTextFields();
 });

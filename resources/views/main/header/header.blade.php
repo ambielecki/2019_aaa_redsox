@@ -19,18 +19,13 @@
     <li><a href="#">Settings</a></li>
 </ul>
 
-@auth
-    <ul id="dive_log_dropdown" class="dropdown-content text-blue">
-        <li><a href="{{ route('dive_log_list') }}">View Dives</a></li>
-        <li><a href="{{ route('dive_log_create') }}">Log Dive</a></li>
-    </ul>
-@endauth
-
 @admin
     <ul id="admin_dropdown" class="dropdown-content text-blue">
+        <li><a href="{{ route('admin') }}">Admin Panel</a></li>
         <li><a href="{{ route('admin_home_edit') }}">Home Page</a></li>
         <li><a href="{{ route('admin_image_list') }}">Images</a></li>
         <li><a href="{{ route('admin_blog_list') }}">Blog</a></li>
+        <li><a href="{{ route('admin_event_list') }}">Events</a></li>
     </ul>
 @endadmin
 
@@ -40,16 +35,10 @@
         <div class="nav-wrapper">
             <div class="row">
                 <div class="col s12">
-                    <a href="/" class="brand-logo">DiveLogRepeat</a>
+                    <a href="/" class="brand-logo">{{ config('app.name') }}</a>
                     <a href="#" data-target="mobile_nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="{{ route('calculator') }}">Calculator</a></li>
-                        @auth
-                            <li><a class="dropdown-trigger" href="#!" data-target="dive_log_dropdown">Dive Log<i class="material-icons right">arrow_drop_down</i></a></li>
-                        @endauth
-                        @guest
-                            <li><a href="{{ route('dive_log_list') }}">Dive Log</a></li>
-                        @endguest
+                        <li><a href="{{ route('event_list') }}">Events</a></li>
                         <li><a href="{{ route('blog_list') }}">Blog</a></li>
                         @admin
                             <li><a class="dropdown-trigger" href="#!" data-target="admin_dropdown">Admin<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -68,23 +57,7 @@
 
 {{-- Mobile Nav --}}
 <ul class="sidenav" id="mobile_nav">
-    <li><a href="{{ route('calculator') }}">Calculator</a></li>
-    @auth
-        <ul class="collapsible" data-collapsible="accordian">
-            <li>
-                <div class="collapsible-header black-text">Dive Log</div>
-                <div class="collapsible-body side_nav_collapse">
-                    <ul>
-                        <li><a href="{{ route('dive_log_list') }}">View Dives</a></li>
-                        <li><a href="{{ route('dive_log_create') }}">Log Dive</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    @endauth
-    @guest
-        <li><a href="{{ route('dive_log_list') }}">Dive Log</a></li>
-    @endguest
+    <li><a href="{{ route('event_list') }}">Events</a></li>
     <li><a href="{{ route('blog_list') }}">Blog</a></li>
     @admin
         <ul class="collapsible" data-collapsible="accordian">
@@ -92,9 +65,11 @@
                 <div class="collapsible-header black-text">Admin</div>
                 <div class="collapsible-body side_nav_collapse">
                     <ul>
+                        <li><a href="{{ route('admin') }}">Admin Panel</a></li>
                         <li><a href="{{ route('admin_home_edit') }}">Home Page</a></li>
                         <li><a href="{{ route('admin_image_list') }}">Images</a></li>
                         <li><a href="{{ route('admin_blog_list') }}">Blog</a></li>
+                        <li><a href="{{ route('admin_event_list') }}">Events</a></li>
                     </ul>
                 </div>
             </li>

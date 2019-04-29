@@ -2,8 +2,6 @@
 
 Auth::routes();
 
-Route::get('calculator', 'DiveCalculatorController@getIndex')->name('calculator');
-
 Route::get('/', 'HomeController@getHome')->name('home');
 
 Route::group(['prefix' => '/blog'], function () {
@@ -11,18 +9,16 @@ Route::group(['prefix' => '/blog'], function () {
     Route::get('/{slug}', 'BlogController@getView')->name('blog_view');
 });
 
-Route::group(['prefix' => '/dive-log'], function () {
-    // Really just for the name, all will be handle by vue
-    Route::get('/', 'DiveLogController@getApp')->name('dive_log_list');
-    Route::get('/create', 'DiveLogController@getApp')->name('dive_log_create');
-    Route::get('/edit/{dive_number}', 'DiveLogController@getEdit')->name('dive_log_edit');
-    Route::fallback('DiveLogController@getApp');
+Route::group(['prefix' => '/event'], function () {
+    Route::get('/list', 'EventController@getList')->name('event_list');
+    Route::get('/{id}', 'EventController@getView')->name('event_view');
 });
+
 
 Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@getIndex')->name('admin');
 
-    Route::group(['prefix' => 'home'], function () {
+    Route::group(['prefix' => '/home'], function () {
         Route::get('/{id?}', 'HomeController@getEdit')->name('admin_home_edit');
         Route::post('/', 'HomeController@postEdit');
     });
@@ -43,6 +39,14 @@ Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
         Route::post('/edit/{id}', 'BlogController@postAdminEdit');
     });
 
+    Route::group(['prefix' => '/event'], function () {
+        Route::get('/', 'EventController@getAdminList')->name('admin_event_list');
+        Route::get('/create', 'EventController@getAdminCreate')->name('admin_event_create');
+        Route::post('/create', 'EventController@postAdminCreate');
+        Route::get('/edit/{id}', 'EventController@getAdminEdit')->name('admin_event_edit');
+        Route::post('/edit/{id}', 'EventController@postAdminEdit');
+    });
+
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('test', 'TestController@getTest');
 });
@@ -53,16 +57,6 @@ Route::group(['prefix' => '/api'], function () {
 
     Route::group(['prefix' => '/blog'], function () {
         Route::get('/list', 'BlogController@getApiList');
-    });
-
-    Route::group(['prefix' => '/dive-log'], function () {
-        Route::get('/list', 'DiveLogController@getApiList');
-
-        // these are essentially get routes using post so we do not have to use query params
-        Route::post('/edit-info/{dive_number}', 'DiveLogController@postApiEditInfo');
-        Route::post('/next-dive-info', 'DiveLogController@postApiNextDiveInfo');
-
-        Route::post('/user', 'DiveLogController@postApiUser');
     });
 
     // admin api routes

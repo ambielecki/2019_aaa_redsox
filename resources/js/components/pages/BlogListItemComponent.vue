@@ -38,7 +38,7 @@
             },
         },
         updated() {
-            DiveLogRepeat.initMaterialBox();
+            Bielecki.initMaterialBox();
         }
     }
 </script>

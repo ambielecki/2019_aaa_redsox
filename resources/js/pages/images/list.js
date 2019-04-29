@@ -57,7 +57,7 @@ let app = new Vue({
             });
         },
 
-        searchImages: DiveLogRepeat.debounce(function () {
+        searchImages: Bielecki.debounce(function () {
             this.getImageList();
         }, 500),
     },

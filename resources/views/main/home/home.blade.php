@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ $page['title'] ?: 'DiveLogRepeat - Home' }}
+    {{ config('app.name') . ' - Home' }}
 @endsection
 
 @section('content')
     @if (isset($content['hero_image']))
         <div class="row hero_image_block">
-            <img class="hero_image" alt="{{ $content['hero_image']['caption'] ?? 'Welcome To DiveLogRepeat' }}" src="/{{ $content['hero_image']['folder'] . $content['hero_image']['file_name'] }}">
+            <img class="hero_image" alt="{{ $content['hero_image']['caption'] ?? 'Welcome To ' . config('app.name') }}" src="/{{ $content['hero_image']['folder'] . $content['hero_image']['file_name'] }}">
             <div class="hero_text">
                 {{ $content['hero_image']['title'] ?: 'Welcome To DiveLogRepeat' }}
             </div>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="col m4 s12 pull-m8">
-                            @if (!empty($content['carousel_images']))
+                            @if (!empty($content['carousel_images']['images']))
                                 <div class="carousel carousel-slider center">
                                     @foreach ($content['carousel_images']['images'] as $image)
                                         <a class="carousel-item" href="/{{ $image['folder'] }}{{ $image['file_name'] }}">

@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Admin - Blog Create
+    Admin - Event Create
 @endsection
 
 @section('content')
-    @include('admin.blog.form', [
-        'route'       => route('admin_blog_create'),
-        'button_text' => 'Add Post',
-        'title'       => 'Add New Blog Post'
+    @include('admin.event.form', [
+        'route'       => route('admin_event_create'),
+        'button_text' => 'Add Event',
+        'title'       => 'Add New Event'
     ])
 @endsection
 

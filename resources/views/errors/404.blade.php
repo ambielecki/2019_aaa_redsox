@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    DiveLogRepeat - 404
+    {{ config('app.name') }} - 404
 @stop
 
 @section('content')

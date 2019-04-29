@@ -24,7 +24,7 @@ class HomePage extends Page {
         $content = json_decode($value, true);
 
         if (isset($content['hero_image'])) {
-            $hero_image = Image::find($content['hero_image']['id']);
+            $hero_image = isset($content['hero_image']['id']) ? Image::find($content['hero_image']['id']) : null;
             $hero_image = $hero_image ? $hero_image->toArray() : [];
 
             $content['hero_image'] = array_merge($hero_image, $content['hero_image']);

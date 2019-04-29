@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Register - DiveLogRepeat
+    Register - {{ config('app.name') }}
 @endsection
 
 @section('content')

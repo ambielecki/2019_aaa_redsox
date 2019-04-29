@@ -59,11 +59,11 @@ let app = new Vue({
             });
         },
 
-        searchImages: DiveLogRepeat.debounce(function () {
+        searchImages: Bielecki.debounce(function () {
             this.getImageList();
         }, 500),
 
-        checkSlug: DiveLogRepeat.debounce(function () {
+        checkSlug: Bielecki.debounce(function () {
             let title = document.querySelector('#title').value;
             Vue.set(app.errors, 'title', '');
             Axios.post('/api/admin/blog/slug-check', {
