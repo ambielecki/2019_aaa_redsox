@@ -13,5 +13,5 @@
 @endsection
 
 @push('page_scripts')
-    <script type="text/javascript" src="{{ mix('/js/pages/event/form.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/pages/blog/form.js') }}"></script>
 @endpush

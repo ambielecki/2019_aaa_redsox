@@ -42,9 +42,11 @@ class HomeController extends Controller {
             $is_current = true;
         }
 
+        $current_page = $current_page ?? new HomePage();
+
         return view('admin.home.home', [
             'current_page' => $current_page,
-            'content'      => $current_page->content,
+            'content'      => $current_page->content ?? [],
             'is_current'   => $is_current,
         ]);
     }
@@ -55,18 +57,22 @@ class HomeController extends Controller {
             ->first();
 
         $page = new HomePage();
-        $page->revision = $last_page->revision + 1;
+        $page->revision = $last_page ? $last_page->revision + 1 : 1;
         $page->is_active = $request->input('save_as_active') ? 1 : 0;
         $page->content = $request->input('content');
         $page->title = $request->input('title');
-        $page->parent_id = $last_page->parent_id ?? $last_page->id;
+        if ($last_page) {
+          $page->parent_id = $last_page->parent_id ?? $last_page->id;
+        }
 
         if ($page->save()) {
             if ($request->input('save_as_active')) {
+              if ($last_page) {
                 HomePage::query()
-                    ->where('slug', $last_page->slug)
-                    ->where('id', '<>', $page->id)
-                    ->update(['is_active' => 0]);
+                  ->where('slug', $last_page->slug)
+                  ->where('id', '<>', $page->id)
+                  ->update(['is_active' => 0]);
+              }
             }
 
             Session::flash('flash_success', 'Home Page Saved');

@@ -1,7 +1,9 @@
 let app = new Vue({
     el: '#home_edit_app',
     data: {
-        carousel_images: {},
+        carousel_images: {
+            images: [],
+        },
         count: null,
         current_content: {},
         current_page: {},
@@ -81,6 +83,8 @@ let app = new Vue({
         carouselClick(clicked_image) {
             let index_to_remove = null;
 
+            console.log(this.carousel_images);
+
             this.carousel_images.images.forEach(function (image, index) {
                 if (image.id === clicked_image.id) {
                     index_to_remove = index;
@@ -132,7 +136,6 @@ let app = new Vue({
                     page: this.post_page,
                 }
             }).then(function (response) {
-                console.log(response.data);
                 app.previous_versions = response.data.posts;
                 app.post_page = response.data.page;
                 app.post_pages = response.data.pages;

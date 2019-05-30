@@ -40,6 +40,6 @@ class HomePage extends Page {
             $content['carousel_images']['images'] = $carousel_images;
         }
 
-        return $content;
+        return $content ?? [];
     }
 }

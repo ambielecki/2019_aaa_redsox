@@ -78,7 +78,7 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="content_title" name="content[title]" type="text" value="{{ old('content.title', $content['title']) }}">
+                                    <input id="content_title" name="content[title]" type="text" value="{{ old('content.title', $content['title'] ?? '') }}">
                                     <label for="title">Content Title</label>
                                     @if ($errors->has('content.title'))
                                         <span class="red-text">
@@ -90,8 +90,8 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="content_content" name="content[content]" class="ck_textarea">
-                                        {{ old('content.content', $content['content'] ?: '') }}
+                                    <textarea id="content_content" name="content[content]" id="content_content" class="ck_textarea">
+                                        {{ old('content.content', $content['content'] ?? '') }}
                                     </textarea>
                                     <label for="content_content">Main Content</label>
                                     @if ($errors->has('content.content'))
