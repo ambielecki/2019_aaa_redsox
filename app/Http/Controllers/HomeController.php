@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pages\BlogPage;
 use App\Models\Pages\HomePage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,12 +17,23 @@ class HomeController extends Controller {
             ->orderBy('revision', 'DESC')
             ->first();
 
+        $max_blog_posts = (int) ($page->content['blog_posts'] ?? 0);
+
+        $blog_posts = BlogPage::query()
+            ->where('is_active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->limit($max_blog_posts)
+            ->get();
+
+        dd($blog_posts->toArray());
+
         $content = $page->content ?? [];
         unset($page['content']);
 
         return view('main.home.home', [
             'page'    => $page,
             'content' => $content,
+            'blog_posts' => $blog_posts,
         ]);
     }
 
