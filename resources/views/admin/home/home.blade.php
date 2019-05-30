@@ -271,12 +271,6 @@
             current_page: JSON.parse('{!! json_encode($current_page) !!}'),
             current_content: JSON.parse('{!! json_encode($content) !!}'),
         };
-
-        ClassicEditor
-            .create(document.querySelector( '.ck_textarea' ))
-            .catch(error => {
-                console.error(error);
-            });
     </script>
     <script type="text/javascript" src="/js/pages/home/edit.js"></script>
 @endpush

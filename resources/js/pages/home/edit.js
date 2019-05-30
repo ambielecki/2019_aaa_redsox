@@ -150,3 +150,13 @@ let app = new Vue({
         },
     },
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector( '.ck_textarea' ))
+      .catch(error => {
+          console.error(error);
+      });
+
+    new ClipBoard('.copy_btn');
+});
