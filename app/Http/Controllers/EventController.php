@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -59,7 +60,21 @@ class EventController extends Controller {
         ]);
     }
 
-    public function postAdminCreate(BlogRequest $request): RedirectResponse {
+    public function postAdminCreate(EventRequest $request): RedirectResponse
+    {
+        if (Event::create([
+            'type' => $request->input('type'),
+            'location' => $request->input('location'),
+            'start_time' => date('Y-m-d H:i', strtotime($request->input('date') . ' ' . $request->input('time'))),
+            'details' => $request->input('details'),
+        ])) {
+            Session::flash('flash_success', 'Event created successfully');
+
+            return redirect()->route('home');
+        }
+
+        Session::flash('flash_error', 'There was a problem saving your event');
+
         return back()->withInput();
     }
 
@@ -67,7 +82,7 @@ class EventController extends Controller {
         return view();
     }
 
-    public function postAdminEdit(BlogRequest $request, $id): RedirectResponse {
+    public function postAdminEdit(EventRequest $request, $id): RedirectResponse {
         return back()->withInput();
     }
 }

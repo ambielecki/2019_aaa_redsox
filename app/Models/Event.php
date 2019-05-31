@@ -14,4 +14,12 @@ class Event extends Model {
         self::TYPE_GAME => 'Game',
         self::TYPE_PRACTICE => 'Practice',
     ];
+
+    public function getDetailsAttribute($value): array {
+        return json_decode($value, true);
+    }
+
+    public function setDetailsAttribute($value): void {
+        $this->attributes['details'] = json_encode($value ?: []);
+    }
 }

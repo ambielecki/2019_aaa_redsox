@@ -16,6 +16,11 @@
                                     @endforeach
                                 </select>
                                 <label for="type">Type</label>
+                                @if ($errors->has('type'))
+                                    <span class="red-text">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="input-field col s12 m6">
@@ -38,6 +43,11 @@
                                     @endforeach
                                 </select>
                                 <label for="details_home">Home Team</label>
+                                @if ($errors->has('details.home'))
+                                    <span class="red-text">
+                                        <strong>{{ $errors->first('details.home') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="input-field col s12 m6">
@@ -55,11 +65,21 @@
                             <div class="input-field col s12 m6">
                                 <input type="text" id="date" name="date" class="datepicker">
                                 <label for="date">Date</label>
+                                @if ($errors->has('date'))
+                                    <span class="red-text">
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="input-field col s12 m6">
                                 <input type="text" id="time" name="time" class="timepicker">
                                 <label for="time">Time</label>
+                                @if ($errors->has('time'))
+                                    <span class="red-text">
+                                        <strong>{{ $errors->first('time') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
