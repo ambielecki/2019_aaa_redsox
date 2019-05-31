@@ -15,7 +15,7 @@
     @endif
 
     <div class="row">
-        <div class="col s12">
+        <div class="col m8 s12">
             <div class="card">
                 <div class="card-content">
                     <div class="row">
@@ -40,5 +40,42 @@
                 </div>
             </div>
         </div>
+
+        <div class="col m4 s12" id="home_app">
+            <div class="row">
+                <div class="col s12">
+                    <div v-if="posts_loading" class="card center-align">
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else-if="posts.length > 0">
+                        <div class="card blog_card col s12">
+                            <div class="card-content">
+                                <blog-item  v-for="post in posts" :post="post"></blog-item>
+                                <div v-if="pages > 1" class="row">
+                                    <div class="col sm12">
+                                        <a class="btn" href="/blog/list">View Older Posts</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
+
+@push('page_scripts')
+    <script type="text/javascript" src="{{ mix('/js/pages/home/home.js') }}"></script>
+@endpush

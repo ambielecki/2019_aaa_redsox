@@ -48,7 +48,7 @@ class ImageController extends Controller {
             $tags = array_unique(array_merge($existing_tags, $new_tag_ids));
             $image->tags()->attach($tags);
 
-            CommandUtility::runBackgroundCommand("php artisan divelog:resize_image --id=$image->id");
+            CommandUtility::runBackgroundCommand("php artisan baseball:resize_image --id=$image->id");
 
             Session::flash('flash_success', 'Image Uploaded Successfully');
 

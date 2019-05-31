@@ -88,12 +88,14 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <label for="content_content" class="label_override" style="display: block">Main Content</label>
+                            </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea id="content_content" name="content[content]" id="content_content" class="ck_textarea">
                                         {{ old('content.content', $content['content'] ?? '') }}
                                     </textarea>
-                                    <label for="content_content">Main Content</label>
                                     @if ($errors->has('content.content'))
                                         <span class="red-text">
                                             <strong>{{ $errors->first('title') }}</strong>

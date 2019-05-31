@@ -15,7 +15,7 @@ use Log;
 class ResizeImage extends Command {
     use UsesDatedConsoleOutput;
 
-    protected $signature = 'divelog:resize_image
+    protected $signature = 'baseball:resize_image
         {id : the task id}';
 
     protected $description = 'Stores various image sizes after upload';

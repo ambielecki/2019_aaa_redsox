@@ -21,7 +21,13 @@
                 </div>
             </div>
 
-            <div v-else-if="posts.length > 0"><blog-item  v-for="post in posts" :post="post"></blog-item></div>
+            <div v-else-if="posts.length > 0">
+                <div v-for="post in posts" class="card blog_card col s12">
+                    <div class="card-content">
+                        <blog-item :post="post"></blog-item>
+                    </div>
+                </div>
+            </div>
 
             <div v-else class="card col s12">
                 <div class="card-content">
