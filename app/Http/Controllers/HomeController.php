@@ -25,8 +25,6 @@ class HomeController extends Controller {
             ->limit($max_blog_posts)
             ->get();
 
-        dd($blog_posts->toArray());
-
         $content = $page->content ?? [];
         unset($page['content']);
 
