@@ -59,6 +59,10 @@ Route::group(['prefix' => '/api'], function () {
         Route::get('/list', 'BlogController@getApiList');
     });
 
+    Route::group(['prefix' => '/event'], function () {
+        Route::get('/list', 'EventController@getApiList');
+    });
+
     // admin api routes
     Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
         // admin image api routes

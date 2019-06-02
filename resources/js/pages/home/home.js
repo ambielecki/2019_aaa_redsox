@@ -3,6 +3,8 @@ let app = new Vue({
     data: {
         count: null,
         errors: {},
+        events: [],
+        events_loading: false,
         limit: 3,
         page: 1,
         pages: null,
@@ -13,6 +15,7 @@ let app = new Vue({
     mounted: function () {
         console.log('mounted');
         this.getPostList();
+        this.getEventList();
     },
     methods: {
         getPostList() {
@@ -33,5 +36,19 @@ let app = new Vue({
                 console.log(error);
             });
         },
+        getEventList() {
+            this.events_loading = true;
+            Axios.get('/api/event/list', {
+                params: {
+                    days: 7,
+                }
+            }).then(function (response) {
+                app.events_loading = false;
+                app.events = response.data.events;
+            }).catch(function (error) {
+                this.events_loading = false;
+                console.log(error);
+            });
+        }
     },
 });

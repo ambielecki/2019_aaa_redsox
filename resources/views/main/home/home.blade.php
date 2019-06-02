@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row" id="home_app">
         <div class="col m8 s12">
             <div class="card">
                 <div class="card-content">
@@ -41,7 +41,41 @@
             </div>
         </div>
 
-        <div class="col m4 s12" id="home_app">
+        <div class="col m4 s12">
+            <div class="row">
+                <div class="col s12">
+                    <div v-if="events_loading" class="card center-align">
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else-if="events.length > 0">
+                        <div class="card blog_card col s12">
+                            <div class="card-content">
+                                <event-item
+                                    v-for="(event, index) in events"
+                                    :event="event"
+                                    :hr="true"
+                                    :length="events.length"
+                                    :index="index"
+                                ></event-item>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col m8 s12">
             <div class="row">
                 <div class="col s12">
                     <div v-if="posts_loading" class="card center-align">
@@ -61,7 +95,13 @@
                     <div v-else-if="posts.length > 0">
                         <div class="card blog_card col s12">
                             <div class="card-content">
-                                <blog-item  v-for="post in posts" :post="post"></blog-item>
+                                <blog-item
+                                    v-for="(post, index) in posts"
+                                    :post="post"
+                                    :hr="true"
+                                    :length="posts.length"
+                                    :index="index"
+                                ></blog-item>
                                 <div v-if="pages > 1" class="row">
                                     <div class="col sm12">
                                         <a class="btn" href="/blog/list">View Older Posts</a>

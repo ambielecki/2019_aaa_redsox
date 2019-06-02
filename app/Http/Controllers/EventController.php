@@ -20,32 +20,28 @@ class EventController extends Controller {
     }
 
     public function getApiList(Request $request): JsonResponse {
-        $search = $request->get('search');
-        $page = $request->get('page') ?: 1;
-        $limit = $request->get('limit') ?: 20;
-        $skip = ($page - 1) * $limit;
+        $days = $request->get('days');
 
-        $query = BlogPage::query()
-            ->where('is_active', 1)
-            ->orderBy('id', 'DESC');
+        $query = Event::query()
+            ->orderBy('start_time', 'ASC');
 
-        if ($search) {
-            $search = '%' . $search . '%';
-            $query = $query->where('title', 'LIKE', $search);
+        if ($days) {
+            $query = $query
+                ->where([
+                    ['start_time', '>=', date('Y-m-d', strtotime('today'))],
+                    ['start_time', '<=', date('Y-m-d', strtotime('+7 days'))],
+                ]);
         }
 
         $count = $query->count();
 
-        $posts = $query
-            ->limit($limit)
-            ->skip($skip)
+        $events = $query
             ->get();
 
-        $posts = $posts->map(function ($post) {
-            return BlogPage::processContent($post);
-        });
-
-        return response()->json([]);
+        return response()->json([
+            'events' => $events,
+            'count' => $count,
+        ]);
     }
 
     public function getAdminList(): View {

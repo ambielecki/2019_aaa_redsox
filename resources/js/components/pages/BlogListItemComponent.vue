@@ -19,12 +19,13 @@
                 <a class="btn" @click="toggleVisibility">{{ show_post ? 'Hide Post' : 'Show Post' }}</a>
             </div>
         </div>
+        <hr v-if="hr && index < length - 1">
     </div>
 </template>
 
 <script>
     export default {
-        props: ['post'],
+        props: ['post', 'hr', 'length', 'index'],
         data() {
             return {
                 show_post: false,

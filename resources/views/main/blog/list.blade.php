@@ -22,9 +22,14 @@
             </div>
 
             <div v-else-if="posts.length > 0">
-                <div v-for="post in posts" class="card blog_card col s12">
+                <div v-for="(post, index) in posts" class="card blog_card col s12">
                     <div class="card-content">
-                        <blog-item :post="post"></blog-item>
+                        <blog-item
+                            :post="post"
+                            :hr="false"
+                            :length="posts.length"
+                            :index="index"
+                        ></blog-item>
                     </div>
                 </div>
             </div>

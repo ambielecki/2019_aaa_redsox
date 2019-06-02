@@ -156,6 +156,7 @@ window.Bielecki = {
         Vue.component('form-error', require('./components/FormErrorComponent').default);
         Vue.component('post-versions', require('./components/pages/RevisionListComponent').default);
         Vue.component('blog-item', require('./components/pages/BlogListItemComponent').default);
+        Vue.component('event-item', require('./components/pages/EventListItemComponent').default)
     },
 
     initVueFilters: () => {
