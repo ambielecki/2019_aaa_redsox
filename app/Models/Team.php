@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
-class Team {
+use Illuminate\Database\Eloquent\Model;
+
+class Team extends Model {
+    protected $fillable = ['name', 'year', 'division_id', 'is_active'];
+
     const TEAM_RED_SOX = 'red_sox';
     const TEAM_DODGERS = 'dodgers';
     const TEAM_MARLINS = 'marlins';
@@ -14,4 +18,6 @@ class Team {
         self::TEAM_MARLINS => 'Marlins',
         self::TEAM_AS => "A's",
     ];
+
+
 }

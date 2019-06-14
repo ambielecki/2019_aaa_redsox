@@ -65,7 +65,7 @@ class EventController extends Controller {
             'type' => $request->input('type'),
             'location' => $request->input('location'),
             'start_time' => date('Y-m-d H:i', strtotime($request->input('date') . ' ' . $request->input('time'))),
-            'details' => $request->input('details'),
+            'details' => Event::processDetails($request),
         ])) {
             Session::flash('flash_success', 'Event created successfully');
 
