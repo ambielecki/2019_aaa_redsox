@@ -111,3 +111,8 @@
         </div>
     </div> {{-- End Form Column--}}
 </div>
+
+<script>
+    Event = JSON.parse('{!! json_encode($event) !!}');
+    Old = JSON.parse('{!! json_encode(old()) !!}');
+</script>
