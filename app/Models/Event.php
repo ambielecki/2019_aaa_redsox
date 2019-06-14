@@ -28,7 +28,7 @@ class Event extends Model {
         return $details;
     }
 
-    public function getDetailsAttribute($value): array {
+    public function getDetailsAttribute($value) {
         return json_decode($value, true);
     }
 

@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Team extends Model {
     protected $fillable = ['name', 'year', 'division_id', 'is_active'];
+
+    public function division(): BelongsTo {
+        return $this->belongsTo(Division::class);
+    }
 
     const TEAM_RED_SOX = 'red_sox';
     const TEAM_DODGERS = 'dodgers';

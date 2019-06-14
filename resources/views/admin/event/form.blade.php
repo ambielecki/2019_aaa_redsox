@@ -35,11 +35,26 @@
                         </div>
 
                         <div class="row" id='team_div' style="display: none">
+                            <div class="input-field col s12 m12">
+                                <select id="details_division" name="details[division]" class="material_select">
+                                    <option value="" disabled {{ !old('details.home', $team->details['home'] ?? '') ? 'selected' : '' }}>Select Division</option>
+                                    @foreach ($divisions as $division)
+                                        <option value="{{ $division->id }}" {{ old('details.division_id', $event->details['division_id'] ?? '') === $division->id ? 'selected' : '' }}>{{ $division->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="details_division">Division</label>
+                                @if ($errors->has('details.division'))
+                                    <span class="red-text">
+                                        <strong>{{ $errors->first('details.division') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                             <div class="input-field col s12 m6">
                                 <select id="details_home" name="details[home]" class="material_select">
                                     <option value="" disabled {{ !old('details.home', $team->details['home'] ?? '') ? 'selected' : '' }}>Select Home Team</option>
                                     @foreach (\App\Models\Team::TEAM_DESCRIPTIONS as $team => $description)
-                                        <option value="{{ $team }}" {{ old('details.home', $team->details['home'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
+                                        <option value="{{ $team }}" {{ old('details.home', $event->details['home'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
                                     @endforeach
                                 </select>
                                 <label for="details_home">Home Team</label>
@@ -54,7 +69,7 @@
                                 <select id="details_away" name="details[away]" class="material_select">
                                     <option value="" disabled {{ !old('details.away', $team->details['away'] ?? '') ? 'selected' : '' }}>Select Away Team</option>
                                     @foreach (\App\Models\Team::TEAM_DESCRIPTIONS as $team => $description)
-                                        <option value="{{ $team }}" {{ old('details.away', $team->details['away'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
+                                        <option value="{{ $team }}" {{ old('details.away', $event->details['away'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
                                     @endforeach
                                 </select>
                                 <label for="details_away">Away Team</label>

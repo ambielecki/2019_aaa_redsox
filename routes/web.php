@@ -63,6 +63,10 @@ Route::group(['prefix' => '/api'], function () {
         Route::get('/list', 'EventController@getApiList');
     });
 
+    Route::group(['prefix' => '/team'], function () {
+        Route::get('/list', 'TeamController@getApiList');
+    });
+
     // admin api routes
     Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
         // admin image api routes
