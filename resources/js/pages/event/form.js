@@ -1,3 +1,30 @@
+let app = new Vue({
+    el: '#event_app',
+    data: {
+        event: Event,
+        old: Old,
+        teams: [],
+        division: null,
+        home_team: null,
+        away_team: null,
+    },
+    methods: {
+        getTeamList() {
+            console.log('change');
+            Axios.get('/api/team/list', {
+                params: {
+                    division: this.division,
+                }
+            }).then(function (response) {
+                console.log(response);
+                app.teams = response.data.teams;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+    },
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     let event_type = document.querySelector('#type').value;
     if (event_type === 'game') {
