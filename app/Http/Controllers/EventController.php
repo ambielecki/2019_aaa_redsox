@@ -34,9 +34,12 @@ class EventController extends Controller {
         }
 
         $count = $query->count();
+        $events = $query->get();
 
-        $events = $query
-            ->get();
+        $events = $events->map(function ($event) {
+            $event->display_time = date('l, F jS, g:i A', strtotime($event->start_time));
+            return $event;
+        });
 
         return response()->json([
             'events' => $events,

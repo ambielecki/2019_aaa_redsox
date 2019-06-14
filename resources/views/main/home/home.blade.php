@@ -71,6 +71,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <div v-else>
+                        <div class="card blog_card col s12">
+                            <div class="card-content">
+                                <div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <span class="card-title">No Events in the Next 7 Days</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col sm12">
+                                            <a class="btn" href="/event/list">View All Events</a>
+                                        </div>
+                                    </div>
+                                    <hr v-if="hr && index < length - 1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +123,7 @@
                                     :index="index"
                                 ></blog-item>
                                 <div v-if="pages > 1" class="row">
+                                    <hr>
                                     <div class="col sm12">
                                         <a class="btn" href="/blog/list">View Older Posts</a>
                                     </div>
