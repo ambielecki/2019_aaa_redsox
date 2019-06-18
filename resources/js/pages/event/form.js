@@ -10,18 +10,20 @@ let app = new Vue({
     },
     methods: {
         getTeamList() {
-            console.log('change');
             Axios.get('/api/team/list', {
                 params: {
-                    division: this.division,
+                    division_id: this.division,
                 }
             }).then(function (response) {
-                console.log(response);
                 app.teams = response.data.teams;
             }).catch(function (error) {
                 console.log(error);
             });
         },
+    },
+    updated() {
+        let selects = document.querySelectorAll('#details_home, #details_away')
+        Bielecki.initSelects(selects, {});
     },
 });
 

@@ -59,9 +59,7 @@
                             <div class="input-field col s12 m6">
                                 <select id="details_home" name="details[home]" class="material_select">
                                     <option value="" disabled {{ !old('details.home', $event->details['home'] ?? '') ? 'selected' : '' }}>Select Home Team</option>
-                                    @foreach (\App\Models\Team::TEAM_DESCRIPTIONS as $team => $description)
-                                        <option value="{{ $team }}" {{ old('details.home', $event->details['home'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
-                                    @endforeach
+                                    <option v-for="team in teams" v-bind:value="team.id">@{{ team.name }}</option>
                                 </select>
                                 <label for="details_home">Home Team</label>
                                 @if ($errors->has('details.home'))
@@ -74,9 +72,7 @@
                             <div class="input-field col s12 m6">
                                 <select id="details_away" name="details[away]" class="material_select">
                                     <option value="" disabled {{ !old('details.away', $event->details['away'] ?? '') ? 'selected' : '' }}>Select Away Team</option>
-                                    @foreach (\App\Models\Team::TEAM_DESCRIPTIONS as $team => $description)
-                                        <option value="{{ $team }}" {{ old('details.away', $event->details['away'] ?? '') === $team ? 'selected' : '' }}>{{ $description }}</option>
-                                    @endforeach
+                                    <option v-for="team in teams" v-bind:value="team.id">@{{ team.name }}</option>
                                 </select>
                                 <label for="details_away">Away Team</label>
                             </div>
