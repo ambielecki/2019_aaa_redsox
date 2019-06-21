@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
-use App\Models\Division;
 use App\Models\Event;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -57,7 +56,6 @@ class EventController extends Controller {
 
         return view('admin.event.create', [
             'event' => $event,
-            'divisions' => Division::get(),
         ]);
     }
 
@@ -80,7 +78,11 @@ class EventController extends Controller {
     }
 
     public function getAdminEdit($id): View {
-        return view();
+        $event = Event::find($id);
+
+        return view('admin.event.edit', [
+            'event' => $event,
+        ]);
     }
 
     public function postAdminEdit(EventRequest $request, $id): RedirectResponse {

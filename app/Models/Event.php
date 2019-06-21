@@ -21,8 +21,12 @@ class Event extends Model {
 
         $details['display_time'] = date('l, F jS, g:i A', strtotime($request->input('date') . ' ' . $request->input('time')));
         if ($request->input('type') === self::TYPE_GAME) {
-//            $teams =
-//            $details['home'] =
+            $home_team = Team::find($request->input('details.home'));
+            $away_team = Team::find($request->input('details.away'));
+            $details['home'] = $home_team->name;
+            $details['home_id'] = $home_team->id;
+            $details['away'] = $away_team->name;
+            $details['away_id'] = $away_team->id;
         }
 
         return $details;

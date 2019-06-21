@@ -17,11 +17,8 @@ class CreateTeamsTable extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->integer('year');
-            $table->unsignedBigInteger('division_id');
             $table->integer('is_active');
             $table->timestamps();
-
-            $table->foreign('division_id')->references('id')->on('divisions');
         });
     }
 

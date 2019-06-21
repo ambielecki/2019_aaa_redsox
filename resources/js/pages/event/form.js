@@ -4,16 +4,12 @@ let app = new Vue({
         event: Event,
         old: Old,
         teams: [],
-        division: null,
         home_team: null,
         away_team: null,
     },
     methods: {
         getTeamList() {
             Axios.get('/api/team/list', {
-                params: {
-                    division_id: this.division,
-                }
             }).then(function (response) {
                 app.teams = response.data.teams;
             }).catch(function (error) {

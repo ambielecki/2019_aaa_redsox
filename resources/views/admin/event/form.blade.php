@@ -35,27 +35,6 @@
                         </div>
 
                         <div class="row" id='team_div' style="display: none">
-                            <div class="input-field col s12 m12">
-                                <select
-                                    v-model="division"
-                                    v-on:change="getTeamList"
-                                    id="details_division"
-                                    name="details[division]"
-                                    class="material_select"
-                                >
-                                    <option value="" disabled {{ !old('details.division_id', $event->details['division_id'] ?? '') ? 'selected' : '' }}>Select Division</option>
-                                    @foreach ($divisions as $division)
-                                        <option value="{{ $division->id }}" {{ old('details.division_id', $event->details['division_id'] ?? '') === $division->id ? 'selected' : '' }}>{{ $division->name }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="details_division">Division</label>
-                                @if ($errors->has('details.division'))
-                                    <span class="red-text">
-                                        <strong>{{ $errors->first('details.division') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
                             <div class="input-field col s12 m6">
                                 <select id="details_home" name="details[home]" class="material_select">
                                     <option value="" disabled {{ !old('details.home', $event->details['home'] ?? '') ? 'selected' : '' }}>Select Home Team</option>
