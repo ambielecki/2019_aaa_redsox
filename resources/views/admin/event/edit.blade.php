@@ -6,7 +6,7 @@
 
 @section('content')
     @include('admin.event.form', [
-        'route'       => route('admin_event_create'),
+        'route'       => route('admin_event_edit', ['id' => $event->id]),
         'button_text' => 'Edit Event',
         'title'       => 'Edit Event'
     ])

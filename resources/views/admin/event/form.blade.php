@@ -38,7 +38,9 @@
                             <div class="input-field col s12 m6">
                                 <select id="details_home" name="details[home]" class="material_select">
                                     <option value="" disabled {{ !old('details.home', $event->details['home'] ?? '') ? 'selected' : '' }}>Select Home Team</option>
-                                    <option v-for="team in teams" v-bind:value="team.id">@{{ team.name }}</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}" {{ old('details.home', $event->details['home_id'] ?? '') === $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                    @endforeach
                                 </select>
                                 <label for="details_home">Home Team</label>
                                 @if ($errors->has('details.home'))
@@ -51,7 +53,9 @@
                             <div class="input-field col s12 m6">
                                 <select id="details_away" name="details[away]" class="material_select">
                                     <option value="" disabled {{ !old('details.away', $event->details['away'] ?? '') ? 'selected' : '' }}>Select Away Team</option>
-                                    <option v-for="team in teams" v-bind:value="team.id">@{{ team.name }}</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}" {{ old('details.away', $event->details['away_id'] ?? '') === $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                    @endforeach
                                 </select>
                                 <label for="details_away">Away Team</label>
                             </div>
@@ -59,7 +63,7 @@
 
                         <div class="row">
                             <div class="input-field col s12 m6">
-                                <input type="text" id="date" name="date" class="datepicker">
+                                <input type="text" id="date" name="date" class="datepicker" value="{{ old('date', $event->start_time ? date('Y-m-d', strtotime($event->start_time)) : '') }}">
                                 <label for="date">Date</label>
                                 @if ($errors->has('date'))
                                     <span class="red-text">
@@ -69,7 +73,7 @@
                             </div>
 
                             <div class="input-field col s12 m6">
-                                <input type="text" id="time" name="time" class="timepicker">
+                                <input type="text" id="time" name="time" class="timepicker" value="{{ old('time', $event->start_time ? date('h:i A', strtotime($event->start_time)) : '') }}">
                                 <label for="time">Time</label>
                                 @if ($errors->has('time'))
                                     <span class="red-text">
@@ -92,8 +96,3 @@
         </div>
     </div> {{-- End Form Column--}}
 </div>
-
-<script>
-    Event = JSON.parse('{!! json_encode($event) !!}');
-    Old = JSON.parse('{!! json_encode(old()) !!}');
-</script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -53,9 +54,13 @@ class EventController extends Controller {
 
     public function getAdminCreate(): View {
         $event = new Event();
+        $teams = Team::query()
+            ->orderBy('name', 'ASC')
+            ->get();
 
         return view('admin.event.create', [
             'event' => $event,
+            'teams' => $teams,
         ]);
     }
 
@@ -79,13 +84,34 @@ class EventController extends Controller {
 
     public function getAdminEdit($id): View {
         $event = Event::find($id);
+        $teams = Team::query()
+            ->orderBy('name', 'ASC')
+            ->get();
 
         return view('admin.event.edit', [
             'event' => $event,
+            'teams' => $teams,
         ]);
     }
 
     public function postAdminEdit(EventRequest $request, $id): RedirectResponse {
+        $event = Event::find($id);
+
+        $event->fill([
+            'type' => $request->input('type'),
+            'location' => $request->input('location'),
+            'start_time' => date('Y-m-d H:i', strtotime($request->input('date') . ' ' . $request->input('time'))),
+            'details' => Event::processDetails($request),
+        ]);
+
+        if ($event->save()) {
+            Session::flash('flash_success', 'Event edited successfully');
+
+            return redirect()->route('admin_event_edit', $event->id);
+        }
+
+        Session::flash('flash_error', 'There was a problem editing your event');
+
         return back()->withInput();
     }
 }
